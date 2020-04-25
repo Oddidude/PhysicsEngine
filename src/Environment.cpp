@@ -35,7 +35,6 @@ void Environment::init(const char *title, int x, int y) {
 		isRunning = true;
 	}
 
-	/*
 	for (int i = 0; i < noOfCircles; i++) {
 		do {
 			circleX = rand() % (Environment::width - 64);
@@ -44,13 +43,8 @@ void Environment::init(const char *title, int x, int y) {
 
 		entities.push_back(new Circle("../assets/circle.png", circleX, circleY));
 
-		PVector* force = new PVector(randomFloat(), randomFloat());
-		entities.back()->applyForce(force);
-		delete force;
+		entities.back()->applyForce(new PVector(randomFloat(), randomFloat()));
 	}
-	*/
-
-	entities.push_back(new Circle("../assets/circle.png", Environment::width / 2, Environment::height / 2));
 }
 
 void Environment::handleEvents() {
@@ -70,6 +64,7 @@ void Environment::update() {
 		for (int j = i + 1; j < entities.size(); j++) {
 			if (entities[i]->checkCollision(entities[j])) {
 				entities[i]->bounce(entities[j]);
+				entities[i]->unstuck(entities[j]);
 			}
 		}
 		entities[i]->update();

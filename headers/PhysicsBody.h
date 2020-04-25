@@ -11,6 +11,7 @@ class PhysicsBody {
 		~PhysicsBody();
 
 		PVector* getPos() const { return pos; }
+		int getRadius() const { return radius; }
 
 		void setGravityVector(float force) const {
 			PhysicsBody::gravityVector = new PVector(0, force);
@@ -19,6 +20,8 @@ class PhysicsBody {
 
 		bool checkCollision(PhysicsBody* body);
 		void bounce(PhysicsBody* body);
+
+		void unstuck(PhysicsBody* body);
 
 		void applyForce(PVector* v);
 		void applyAcceleration();

@@ -25,7 +25,7 @@ PhysicsBody::~PhysicsBody() {
 
 bool PhysicsBody::checkCollision(PhysicsBody* body) {
 	float distance = pos->dist(body->getPos()) - radius - body->radius;
-	return distance < 1;
+	return distance <= 0;
 }
 
 void PhysicsBody::bounce(PhysicsBody* body) {
@@ -36,6 +36,17 @@ void PhysicsBody::bounce(PhysicsBody* body) {
 
 	vel->subtract(normal);
 	body->vel->add(normal);
+}
+
+void PhysicsBody::unstuck(PhysicsBody* body) {
+	float distance = pos->dist(body->getPos());
+	if (distance < radius + body->radius) {
+		PVector* translation = PVector::add(this->pos, body->pos);
+		translation->normalize();
+		translation->multiply((radius + body->radius) - distance);
+		
+		this->pos->add(translation);
+	}
 }
 
 void PhysicsBody::applyForce(PVector* v) {
