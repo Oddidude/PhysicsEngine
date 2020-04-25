@@ -27,8 +27,24 @@ PhysicsBody::~PhysicsBody() {
 
 void PhysicsBody::applyFriction() {
 	if (vel->getMagnitude() > 0) {
-		vel->multiply(0.97);
-		if (vel->getMagnitude() < 0.005) {
+		switch (frictionLevel) {
+			case 0:
+				break;
+			case 1:
+				vel->multiply(0.99);
+				break;
+			case 2:
+				vel->multiply(0.97);
+				break;
+			case 3:
+				vel->multiply(0.95);
+				break;
+			default:
+				vel->multiply(0.95);
+				break;
+		}
+
+		if (vel->getMagnitude() < 0.05) {
 			vel->subtract(vel);
 		}
 	}

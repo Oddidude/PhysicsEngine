@@ -59,6 +59,35 @@ void Environment::handleEvents() {
 						entity->applyForce(new PVector(randomFloat(), randomFloat()));
 					}
 					break;
+				case SDLK_0:
+					for (auto entity : entities) {
+						entity->setFrictionLevel(0);
+					}
+					break;
+				case SDLK_1:
+					for (auto entity : entities) {
+						entity->setFrictionLevel(1);
+					}
+					break;
+				case SDLK_2:
+					for (auto entity : entities) {
+						entity->setFrictionLevel(2);
+					}
+					break;
+				case SDLK_3:
+				case SDLK_4:
+				case SDLK_5:
+				case SDLK_6:
+				case SDLK_7:
+				case SDLK_8:
+				case SDLK_9:
+					for (auto entity : entities) {
+						entity->setFrictionLevel(3);
+					}
+					break;
+				case SDLK_q:
+					isRunning = false;
+					break;
 				default:
 					break;
 			}
