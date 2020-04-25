@@ -7,51 +7,58 @@
 
 PVector::PVector(float _x, float _y) : x(_x), y(_y) {}
 
-void PVector::add(PVector* v) {
+PVector* PVector::add(PVector* v) {
 	x += v->x;
 	y += v->y;
+	return this;
 }
 
-void PVector::subtract(PVector* v) {
+PVector* PVector::subtract(PVector* v) {
 	x -= v->x;
 	y -= v->y;
+	return this;
 }
 
-void PVector::multiply(float s) {
+PVector* PVector::multiply(float s) {
 	x *= s;
 	y *= s;
+	return this;
 }
 
-void PVector::divide(float s) {
+PVector* PVector::divide(float s) {
 	x /= s;
 	y /= s;
+	return this;
 }
 
-void PVector::rotate(float angle) {
+PVector* PVector::rotate(float angle) {
 	angle *= PI / 180.0;
 	float cs = cos(angle);
 	float sn = sin(angle);
 	float oldX = x;
 	x = x * cs - y * sn;
 	y = oldX * sn + y * cs;
+	return this;
 }
 
-void PVector::reflect(PVector* normal) {
-	PVector* n = normal->getCopy();
-	n->multiply(2 * dot(n));
-	subtract(n);
+PVector* PVector::reflect(PVector* normal) {
+	normal->multiply(2 * dot(normal));
+	subtract(normal);
+	return this;
 }
 
-void PVector::normalize() {
+PVector* PVector::normalize() {
 	float magnitude = getMagnitude();
 	if (magnitude != 0) {
 		divide(magnitude);
 	}
+	return this;
 }
 
-void PVector::inverse() {
+PVector* PVector::inverse() {
 	x *= -1;
 	y *= -1;
+	return this;
 }
 
 float PVector::dot(PVector* v) {

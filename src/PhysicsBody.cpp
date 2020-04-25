@@ -29,8 +29,7 @@ bool PhysicsBody::checkCollision(PhysicsBody* body) {
 }
 
 void PhysicsBody::bounce(PhysicsBody* body) {
-	PVector* normal = PVector::subtract(pos, body->pos);
-	normal->normalize();
+	PVector* normal = PVector::subtract(pos, body->pos)->normalize();
 
 	normal->multiply(normal->dot(PVector::subtract(vel, body->vel)));
 
@@ -41,8 +40,7 @@ void PhysicsBody::bounce(PhysicsBody* body) {
 void PhysicsBody::unstuck(PhysicsBody* body) {
 	float distance = pos->dist(body->getPos());
 	if (distance < radius + body->radius) {
-		PVector* translation = PVector::add(this->pos, body->pos);
-		translation->normalize();
+		PVector* translation = PVector::add(this->pos, body->pos)->normalize();
 		translation->multiply((radius + body->radius) - distance);
 		
 		this->pos->add(translation);

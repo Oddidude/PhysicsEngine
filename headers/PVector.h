@@ -10,14 +10,14 @@ class PVector {
 		float x;
 		float y;
 
-		void add(PVector* v);
-		void subtract(PVector* v);
-		void multiply(float s);
-		void divide(float s);
-		void rotate(float angle);
-		void reflect(PVector* normal);
-		void normalize();
-		void inverse();
+		PVector* add(PVector* v);
+		PVector* subtract(PVector* v);
+		PVector* multiply(float s);
+		PVector* divide(float s);
+		PVector* rotate(float angle);
+		PVector* reflect(PVector* normal);
+		PVector* normalize();
+		PVector* inverse();
 
 		float dot(PVector* v);
 		float dist(PVector* v);
@@ -27,44 +27,37 @@ class PVector {
 
 		static PVector* add(PVector* v, PVector* v2) {
 			PVector* vCopy = v->getCopy();
-			vCopy->subtract(v2);
-			return vCopy;
+			return vCopy->subtract(v2);
 		}
 
 		static PVector* subtract(PVector* v, PVector* v2) {
 			PVector* vCopy = v->getCopy();
-			vCopy->subtract(v2);
-			return vCopy;
+			return vCopy->subtract(v2);
 		}
 
 		static PVector* multiply(PVector* v, float s) {
 			PVector* vCopy = v->getCopy();
-			vCopy->multiply(s);
-			return vCopy;
+			return vCopy->multiply(s);
 		}
 
 		static PVector* divide(PVector* v, float s) {
 			PVector* vCopy = v->getCopy();
-			vCopy->divide(s);
-			return vCopy;
+			return vCopy->divide(s);
 		}
 
 		static PVector* rotate(PVector* v, float angle) {
 			PVector* vCopy = v->getCopy();
-			vCopy->rotate(angle);
-			return vCopy;
+			return vCopy->rotate(angle);
 		}
 
 		static PVector* normalise(PVector* v) {
 			PVector* vCopy = v->getCopy();
-			vCopy->normalize();
-			return vCopy;
+			return vCopy->normalize();
 		}
 
 		static PVector* inverse(PVector* v) {
 			PVector* vCopy = v->getCopy();
-			vCopy->inverse();
-			return vCopy;
+			return vCopy->inverse();
 		}
 };
 
