@@ -6,7 +6,7 @@
 #include <math.h>
 
 Circle::Circle(const char* textureSheet, float x, float y) 
-	: PhysicsBody { x, y, 32, 1, false }
+	: PhysicsBody { x, y, 32, 1, true, false }
 {
 	texture = TextureManager::LoadTexture(textureSheet);
 

@@ -8,6 +8,7 @@
 #include <ctime>
 
 SDL_Renderer* Environment::renderer = nullptr;
+SDL_Event event;
 
 Environment::Environment() {}
 
@@ -42,17 +43,25 @@ void Environment::init(const char *title, int x, int y) {
 		} while (!checkSpawns(new PhysicsBody(circleX, circleY, 32, 0)));
 
 		entities.push_back(new Circle("../assets/circle.png", circleX, circleY));
-
-		entities.back()->applyForce(new PVector(randomFloat(), randomFloat()));
 	}
 }
 
 void Environment::handleEvents() {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type) {
 		case SDL_QUIT:
 			isRunning = false;
+			break;
+		case SDL_KEYDOWN:
+			switch (event.key.keysym.sym) {
+				case SDLK_SPACE:
+					for (auto entity : entities) {
+						entity->applyForce(new PVector(randomFloat(), randomFloat()));
+					}
+					break;
+				default:
+					break;
+			}
 			break;
 		default:
 			break;

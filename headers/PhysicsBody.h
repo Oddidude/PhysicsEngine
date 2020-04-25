@@ -7,7 +7,7 @@
 
 class PhysicsBody {
 	public:
-		PhysicsBody(float x, float y, int rad, float _mass, bool _gravity=true);
+		PhysicsBody(float x, float y, int rad, float _mass, bool friction=true, bool _gravity=true);
 		~PhysicsBody();
 
 		PVector* getPos() const { return pos; }
@@ -17,6 +17,9 @@ class PhysicsBody {
 			PhysicsBody::gravityVector = new PVector(0, force);
 		}
 		void setMaxSpeed(float speed) { maxSpeed = speed; }
+
+		void setFrictionLevel(int level) { frictionLevel = level; }
+		void applyFriction();
 
 		bool checkCollision(PhysicsBody* body);
 		void bounce(PhysicsBody* body);
@@ -36,6 +39,10 @@ class PhysicsBody {
 		int radius;
 		float mass;
 		float maxSpeed;
+
+		bool friction;
+		int frictionLevel;
+
 		bool gravity;
 
 		static PVector* gravityVector;

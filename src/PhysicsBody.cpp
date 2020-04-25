@@ -7,13 +7,15 @@
 
 PVector* PhysicsBody::gravityVector = new PVector(0, 9.81);
 
-PhysicsBody::PhysicsBody(float x, float y, int rad, float _mass, bool _gravity) {
+PhysicsBody::PhysicsBody(float x, float y, int rad, float _mass, bool _friction, bool _gravity) {
 	pos = new PVector(x, y);
 	vel = new PVector(0, 0);
 	accel = new PVector(0, 0);
 	radius = rad;
 	mass = _mass;
 	maxSpeed = 15;
+	frictionLevel = _friction ? 2 : 0;
+	friction = _friction;
 	gravity = _gravity;
 }
 
@@ -21,6 +23,15 @@ PhysicsBody::~PhysicsBody() {
 	delete pos;
 	delete vel;
 	delete accel;
+}
+
+void PhysicsBody::applyFriction() {
+	if (vel->getMagnitude() > 0) {
+		vel->multiply(0.97);
+		if (vel->getMagnitude() < 0.005) {
+			vel->subtract(vel);
+		}
+	}
 }
 
 bool PhysicsBody::checkCollision(PhysicsBody* body) {
@@ -57,17 +68,10 @@ void PhysicsBody::applyAcceleration() {
 	}
 
 	vel->add(accel);
-	/**
-	 * | Friction |
-	 * v          v
-	 *
-	if (vel->getMagnitude() > 0) {
-		vel->multiply(0.97);
-		if (vel->getMagnitude() < 0.005) {
-			vel->subtract(vel);
-		}
+
+	if (friction) {
+		applyFriction();
 	}
-	*/
 
 	if (accel->getMagnitude() > 0) {
 		accel->multiply(0.5);
