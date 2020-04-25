@@ -6,7 +6,7 @@
 #include <math.h>
 
 Circle::Circle(const char* textureSheet, float x, float y) 
-	: PhysicsBody { x, y, 32, 1, true}
+	: PhysicsBody { x, y, 32, 1, false }
 {
 	texture = TextureManager::LoadTexture(textureSheet);
 
@@ -16,13 +16,6 @@ Circle::Circle(const char* textureSheet, float x, float y)
 	destRect.x = x;
 	destRect.y = y;
 	destRect.w = destRect.h = 64;
-	/*
-	if (gravity) {
-		std::cout << "Gravity: " << gravity << std::endl;
-	} else {
-		std::cout << "No gravity" << std::endl;
-	}
-	*/
 }
 
 void Circle::update() {

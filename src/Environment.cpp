@@ -35,6 +35,7 @@ void Environment::init(const char *title, int x, int y) {
 		isRunning = true;
 	}
 
+	/*
 	for (int i = 0; i < noOfCircles; i++) {
 		do {
 			circleX = rand() % (Environment::width - 64);
@@ -47,6 +48,9 @@ void Environment::init(const char *title, int x, int y) {
 		entities.back()->applyForce(force);
 		delete force;
 	}
+	*/
+
+	entities.push_back(new Circle("../assets/circle.png", Environment::width / 2, Environment::height / 2));
 }
 
 void Environment::handleEvents() {

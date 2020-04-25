@@ -5,7 +5,7 @@
 
 #define PI 3.14159265
 
-PVector::PVector(float x, float y) : x(x), y(y) {}
+PVector::PVector(float _x, float _y) : x(_x), y(_y) {}
 
 void PVector::add(PVector* v) {
 	x += v->x;

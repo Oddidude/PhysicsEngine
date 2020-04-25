@@ -5,7 +5,7 @@
 
 class PVector {
 	public:
-		PVector(float x, float y);
+		PVector(float _x, float _y);
 
 		float x;
 		float y;

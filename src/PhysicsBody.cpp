@@ -7,14 +7,14 @@
 
 PVector* PhysicsBody::gravityVector = new PVector(0, 9.81);
 
-PhysicsBody::PhysicsBody(float x, float y, int rad, float mass, bool gravity) {
+PhysicsBody::PhysicsBody(float x, float y, int rad, float _mass, bool _gravity) {
 	pos = new PVector(x, y);
 	vel = new PVector(0, 0);
 	accel = new PVector(0, 0);
 	radius = rad;
-	mass = mass;
+	mass = _mass;
 	maxSpeed = 15;
-	gravity = gravity;
+	gravity = _gravity;
 }
 
 PhysicsBody::~PhysicsBody() {

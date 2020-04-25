@@ -7,7 +7,7 @@
 
 class PhysicsBody {
 	public:
-		PhysicsBody(float x, float y, int rad, float mass, bool gravity = true);
+		PhysicsBody(float x, float y, int rad, float _mass, bool _gravity=true);
 		~PhysicsBody();
 
 		PVector* getPos() const { return pos; }
@@ -26,7 +26,6 @@ class PhysicsBody {
 		virtual void update();
 		virtual void render();
 
-		bool gravity;
 	private:
 		PVector* pos;
 		PVector* vel;
@@ -34,6 +33,7 @@ class PhysicsBody {
 		int radius;
 		float mass;
 		float maxSpeed;
+		bool gravity;
 
 		static PVector* gravityVector;
 };
