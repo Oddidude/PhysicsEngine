@@ -31,16 +31,16 @@ void PhysicsBody::applyFriction() {
 			case 0:
 				break;
 			case 1:
-				vel->multiply(0.99);
+				vel->multiply(0.98);
 				break;
 			case 2:
-				vel->multiply(0.97);
+				vel->multiply(0.95);
 				break;
 			case 3:
-				vel->multiply(0.95);
+				vel->multiply(0.90);
 				break;
 			default:
-				vel->multiply(0.95);
+				vel->multiply(0.90);
 				break;
 		}
 	}
