@@ -85,6 +85,11 @@ void Environment::handleEvents() {
 						entity->setFrictionLevel(3);
 					}
 					break;
+				case SDLK_g:
+					for (auto entity : entities) {
+						entity->toggleGravity();
+					}
+					break;
 				case SDLK_q:
 					isRunning = false;
 					break;

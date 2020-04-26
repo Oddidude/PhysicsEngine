@@ -43,10 +43,6 @@ void PhysicsBody::applyFriction() {
 				vel->multiply(0.95);
 				break;
 		}
-
-		if (vel->getMagnitude() < 0.05) {
-			vel->subtract(vel);
-		}
 	}
 }
 
@@ -99,6 +95,8 @@ void PhysicsBody::applyAcceleration() {
 	if (vel->getMagnitude() > maxSpeed) {
 		float limiter = vel->getMagnitude() / maxSpeed;
 		vel->divide(limiter);
+	} else if (vel->getMagnitude() < 0.05) {
+		vel->subtract(vel);
 	}
 
 	pos->add(vel);
@@ -107,15 +105,13 @@ void PhysicsBody::applyAcceleration() {
 
 	if (pos->x + diameter < 0) {
 		pos->x = Environment::width + diameter;
-	}
-	if (pos->x - diameter > Environment::width) {
+	} else if (pos->x - diameter > Environment::width) {
 		pos->x = -diameter;
 	}
 	
 	if (pos->y + diameter < 0) {
 		pos->y = Environment::height + diameter;
-	}
-	if (pos->y - diameter > Environment::height) {
+	} else if (pos->y - diameter > Environment::height) {
 		pos->y = -diameter;
 	}
 }

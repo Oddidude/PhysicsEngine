@@ -16,6 +16,8 @@ class PhysicsBody {
 		void setGravityVector(float force) const {
 			PhysicsBody::gravityVector = new PVector(0, force);
 		}
+		void toggleGravity() { gravity = !gravity; }
+
 		void setMaxSpeed(float speed) { maxSpeed = speed; }
 
 		void setFrictionLevel(int level) { frictionLevel = level; }
