@@ -137,7 +137,8 @@ void Environment::clean() {
 }
 
 float Environment::randomFloat() {
-    return ((float(rand()) / float(RAND_MAX)) * 20.0) - 10.0;
+	float maxSpeed = entities.back()->getMaxSpeed();
+	return ((float(rand()) / float(RAND_MAX)) * (2 * maxSpeed)) - maxSpeed;
 }
 
 bool Environment::checkSpawns(PhysicsBody* spawn) {

@@ -18,7 +18,9 @@ class PhysicsBody {
 		}
 		void toggleGravity() { gravity = !gravity; }
 
+		float getMaxSpeed() const { return maxSpeed; }
 		void setMaxSpeed(float speed) { maxSpeed = speed < 0 ? 0 : speed; }
+		void checkMaxSpeed();
 
 		void setFrictionLevel(int level) { frictionLevel = level; }
 		void applyFriction();

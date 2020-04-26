@@ -25,6 +25,20 @@ PhysicsBody::~PhysicsBody() {
 	delete accel;
 }
 
+void PhysicsBody::checkMaxSpeed() {
+	if (vel->x > maxSpeed) {
+		vel->x = maxSpeed;
+	} else if (vel->x < -maxSpeed) {
+		vel->x = -maxSpeed;
+	}
+
+	if (vel->y > maxSpeed) {
+		vel->y = maxSpeed;
+	} else if (vel->y < -maxSpeed) {
+		vel->y = -maxSpeed;
+	}
+}
+
 void PhysicsBody::applyFriction() {
 	if (vel->getMagnitude() > 0) {
 		switch (frictionLevel) {
@@ -92,10 +106,9 @@ void PhysicsBody::applyAcceleration() {
 		}
 	}
 
-	if (vel->getMagnitude() > maxSpeed) {
-		float limiter = vel->getMagnitude() / maxSpeed;
-		vel->divide(limiter);
-	} else if (vel->getMagnitude() < 0.05) {
+	checkMaxSpeed();
+
+	if (vel->getMagnitude() < 0.05) {
 		vel->subtract(vel);
 	}
 
