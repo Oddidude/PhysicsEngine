@@ -14,8 +14,6 @@ Environment::Environment() {}
 
 void Environment::init(const char *title, int x, int y) {
 	int flags = 0;
-	int noOfCircles = 15;
-	int circleX, circleY;
 
 	srand(static_cast<unsigned>(time(0)));
 
@@ -35,15 +33,6 @@ void Environment::init(const char *title, int x, int y) {
 
 		isRunning = true;
 	}
-
-	for (int i = 0; i < noOfCircles; i++) {
-		do {
-			circleX = rand() % (Environment::width - 64);
-			circleY = rand() % (Environment::height - 64);
-		} while (!checkSpawns(new PhysicsBody(circleX, circleY, 32, 0)));
-
-		entities.push_back(new Circle("../assets/circle.png", circleX, circleY));
-	}
 }
 
 void Environment::handleEvents() {
@@ -51,6 +40,19 @@ void Environment::handleEvents() {
 	switch (event.type) {
 		case SDL_QUIT:
 			isRunning = false;
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (event.button.button == SDL_BUTTON_LEFT) {
+				int mouseX, mouseY;
+				SDL_GetMouseState(&mouseX, &mouseY);
+				entities.push_back(
+						new Circle(
+							"../assets/circle.png",
+						mouseX - 32,
+						mouseY - 32
+						)
+				);
+			}
 			break;
 		case SDL_KEYDOWN:
 			switch (event.key.keysym.sym) {
