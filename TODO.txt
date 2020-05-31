@@ -1,0 +1,13 @@
+TODO:
+
+Implement hitbox shapes and attributes for Physics Bodies.
+	Add circle or square hitbox to object
+	Stores hitboxes in class object array
+	Scan through and use current hit detection but on hitboxes instead of sprite
+	Find algorithm for checking if vector is within bounds
+
+Create level editor
+	
+Add fluids and liquids
+	Create parent object with array of fluid objects to update
+	Fluid objects will contain the individual pixel objects and flow algorithm
