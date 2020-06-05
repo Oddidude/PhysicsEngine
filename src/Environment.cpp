@@ -48,8 +48,8 @@ void Environment::handleEvents() {
 					entities.push_back(
 							new Circle(
 								"../assets/circle.png",
-							mouseX - 32,
-							mouseY - 32
+							mouseX,
+							mouseY
 							)
 					);
 				}

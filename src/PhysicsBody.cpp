@@ -8,7 +8,7 @@
 PVector* PhysicsBody::gravityVector = new PVector(0, 9.81);
 
 PhysicsBody::PhysicsBody(float x, float y, int rad, float _mass, bool _friction, bool _gravity) {
-	pos = new PVector(x, y);
+	pos = new PVector(x - rad, y - rad);
 	vel = new PVector(0, 0);
 	accel = new PVector(0, 0);
 	radius = rad;
