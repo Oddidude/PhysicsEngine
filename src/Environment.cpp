@@ -12,8 +12,6 @@ SDL_Event event;
 
 Environment::Environment() {}
 
-int count = 0;
-
 void Environment::init(const char *title, int x, int y) {
 	int flags = 0;
 
@@ -39,7 +37,6 @@ void Environment::init(const char *title, int x, int y) {
 
 void Environment::handleEvents() {
 	while (SDL_PollEvent(&event)) {
-		std::cout << count++ << std::endl;
 		switch (event.type) {
 			case SDL_QUIT:
 				isRunning = false;
