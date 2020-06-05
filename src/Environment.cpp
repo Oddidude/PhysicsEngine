@@ -4,6 +4,7 @@
 #include "../headers/Environment.h"
 #include "../headers/TextureManager.h"
 #include "../headers/Circle.h"
+#include "../headers/Fluid.h"
 #include <math.h>
 #include <ctime>
 
@@ -33,6 +34,8 @@ void Environment::init(const char *title, int x, int y) {
 
 		isRunning = true;
 	}
+
+	entities.push_back(new Fluid(100, 100, 255, 0, 0, 255));
 }
 
 void Environment::handleEvents() {
