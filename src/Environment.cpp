@@ -12,6 +12,8 @@ SDL_Event event;
 
 Environment::Environment() {}
 
+int count = 0;
+
 void Environment::init(const char *title, int x, int y) {
 	int flags = 0;
 
@@ -36,71 +38,73 @@ void Environment::init(const char *title, int x, int y) {
 }
 
 void Environment::handleEvents() {
-	SDL_PollEvent(&event);
-	switch (event.type) {
-		case SDL_QUIT:
-			isRunning = false;
-			break;
-		case SDL_MOUSEBUTTONDOWN:
-			if (event.button.button == SDL_BUTTON_LEFT) {
-				int mouseX, mouseY;
-				SDL_GetMouseState(&mouseX, &mouseY);
-				entities.push_back(
-						new Circle(
-							"../assets/circle.png",
-						mouseX - 32,
-						mouseY - 32
-						)
-				);
-			}
-			break;
-		case SDL_KEYDOWN:
-			switch (event.key.keysym.sym) {
-				case SDLK_SPACE:
-					for (auto entity : entities) {
-						entity->applyForce(new PVector(randomFloat(), randomFloat()));
-					}
-					break;
-				case SDLK_0:
-					for (auto entity : entities) {
-						entity->setFrictionLevel(0);
-					}
-					break;
-				case SDLK_1:
-					for (auto entity : entities) {
-						entity->setFrictionLevel(1);
-					}
-					break;
-				case SDLK_2:
-					for (auto entity : entities) {
-						entity->setFrictionLevel(2);
-					}
-					break;
-				case SDLK_3:
-				case SDLK_4:
-				case SDLK_5:
-				case SDLK_6:
-				case SDLK_7:
-				case SDLK_8:
-				case SDLK_9:
-					for (auto entity : entities) {
-						entity->setFrictionLevel(3);
-					}
-					break;
-				case SDLK_g:
-					for (auto entity : entities) {
-						entity->toggleGravity();
-					}
-					break;
-				case SDLK_q:
-					isRunning = false;
-					break;
-				default:
-					break;
-			}
-			break;
-		default:
-			break;
+	while (SDL_PollEvent(&event)) {
+		std::cout << count++ << std::endl;
+		switch (event.type) {
+			case SDL_QUIT:
+				isRunning = false;
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					int mouseX, mouseY;
+					SDL_GetMouseState(&mouseX, &mouseY);
+					entities.push_back(
+							new Circle(
+								"../assets/circle.png",
+							mouseX - 32,
+							mouseY - 32
+							)
+					);
+				}
+				break;
+			case SDL_KEYDOWN:
+				switch (event.key.keysym.sym) {
+					case SDLK_SPACE:
+						for (auto entity : entities) {
+							entity->applyForce(new PVector(randomFloat(), randomFloat()));
+						}
+						break;
+					case SDLK_0:
+						for (auto entity : entities) {
+							entity->setFrictionLevel(0);
+						}
+						break;
+					case SDLK_1:
+						for (auto entity : entities) {
+							entity->setFrictionLevel(1);
+						}
+						break;
+					case SDLK_2:
+						for (auto entity : entities) {
+							entity->setFrictionLevel(2);
+						}
+						break;
+					case SDLK_3:
+					case SDLK_4:
+					case SDLK_5:
+					case SDLK_6:
+					case SDLK_7:
+					case SDLK_8:
+					case SDLK_9:
+						for (auto entity : entities) {
+							entity->setFrictionLevel(3);
+						}
+						break;
+					case SDLK_g:
+						for (auto entity : entities) {
+							entity->toggleGravity();
+						}
+						break;
+					case SDLK_q:
+						isRunning = false;
+						break;
+					default:
+						break;
+				}
+				break;
+			default:
+				break;
+		}
 	}
 }
 
