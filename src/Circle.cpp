@@ -11,17 +11,17 @@ Circle::Circle(const char* textureSheet, float x, float y)
 	texture = TextureManager::LoadTexture(textureSheet);
 
 	srcRect.x = srcRect.y = 0;
-	srcRect.w = srcRect.h = getRadius() * 2;
+	srcRect.w = srcRect.h = radius * 2;
 
 	destRect.x = x;
 	destRect.y = y;
-	destRect.w = destRect.h = getRadius() * 2;
+	destRect.w = destRect.h = radius * 2;
 }
 
 void Circle::update() {
 	applyAcceleration();
-	destRect.x = getPos()->x;
-	destRect.y = getPos()->y;
+	destRect.x = pos->x;
+	destRect.y = pos->y;
 }
 
 void Circle::render() {

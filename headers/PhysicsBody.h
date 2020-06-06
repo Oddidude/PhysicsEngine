@@ -9,10 +9,10 @@ class PhysicsBody {
 	public:
 		PhysicsBody(float x=0, float y=0, int rad=1, float _mass=0, bool friction=true, bool _gravity=true);
 		~PhysicsBody();
+		
+		static PVector* gravityVector;
 
-		PVector* getPos() const { return pos; }
-		int getRadius() const { return radius; }
-
+		float getMaxSpeed() const { return maxSpeed; }
 		void setGravityVector(float force) const {
 			delete PhysicsBody::gravityVector;
 			PhysicsBody::gravityVector = NULL;
@@ -20,7 +20,7 @@ class PhysicsBody {
 		}
 		void toggleGravity() { gravity = !gravity; }
 
-		float getMaxSpeed() const { return maxSpeed; }
+
 		void setMaxSpeed(float speed) { maxSpeed = speed < 0 ? 0 : speed; }
 		void checkMaxSpeed();
 
@@ -41,6 +41,11 @@ class PhysicsBody {
 		virtual void render();
 
 	private:
+		bool friction;
+		int frictionLevel;
+
+	
+	protected:
 		PVector* pos;
 		PVector* vel;
 		PVector* accel;
@@ -48,12 +53,7 @@ class PhysicsBody {
 		float mass;
 		float maxSpeed;
 
-		bool friction;
-		int frictionLevel;
-
 		bool gravity;
-
-		static PVector* gravityVector;
 };
 
 #endif

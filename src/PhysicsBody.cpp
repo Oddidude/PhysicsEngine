@@ -61,7 +61,7 @@ void PhysicsBody::applyFriction() {
 }
 
 bool PhysicsBody::checkCollision(PhysicsBody* body) {
-	float distance = pos->dist(body->getPos()) - radius - body->radius;
+	float distance = pos->dist(body->pos) - radius - body->radius;
 	return distance <= 0;
 }
 
@@ -75,7 +75,7 @@ void PhysicsBody::bounce(PhysicsBody* body) {
 }
 
 void PhysicsBody::unstuck(PhysicsBody* body) {
-	float distance = pos->dist(body->getPos());
+	float distance = pos->dist(body->pos);
 	if (distance < radius + body->radius) {
 		PVector* translation = PVector::add(this->pos, body->pos)->normalize();
 		translation->multiply((radius + body->radius) - distance);

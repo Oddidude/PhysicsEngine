@@ -9,11 +9,13 @@ Fluid::Fluid(float x, float y, int _r, int _g, int _b, int _a)
 {}
 
 void Fluid::update() {
-
+	if (gravity) {
+		accel->add(PhysicsBody::gravityVector);
+	}
+	vel->add(this->accel);
 }
 
 void Fluid::render() {
-	PVector* pos = this->getPos();
 	SDL_SetRenderDrawColor(Environment::renderer, r, g, b, a);
 	SDL_RenderDrawPoint(Environment::renderer, pos->x, pos->y);
 	SDL_SetRenderDrawColor(Environment::renderer, 255, 255, 255, 255);
